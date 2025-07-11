@@ -1,0 +1,3 @@
+[submodule "packages/tombala-game"]
+	path = packages/tombala-game
+	url = https://github.com/senaerden58/tombala-game.git
