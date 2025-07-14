@@ -1,10 +1,12 @@
 // packages/shared/theme.js
 import { createTheme } from "@mui/material/styles";
+import "@fontsource/press-start-2p"; // yazı tipi seçtim.import ettim.
 
 export const lightTheme = createTheme({
   custom: {
     backgroundGradient: 'linear-gradient(90deg, #ff6ec4 0%, #7873f5 50%, #4ade80 100%)',
   },
+  
   palette: {
     mode: "light",
     primary: { main: "#4ade80" }, // navbar bitiş renginden
