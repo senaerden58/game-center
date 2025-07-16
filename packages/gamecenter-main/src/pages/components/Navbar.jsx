@@ -10,7 +10,7 @@ import GameBussIcon from "../../shared/GameBussIcon";
 
 const pages = [
   //map ile diziyi döndür
-  { name: "Ana Sayfa", path: "/Home" },
+  { name: "AnaSayfa", path: "/Home" },
   { name: "Oyunlar", path: "/games" },
   { name: "İletişim", path: "/contact" },
 ];
@@ -44,9 +44,9 @@ const Navbar = () => {
           sx={{
             fontFamily: "'Press Start 2P', cursive",
             color: "white",
-            display:"flex",
-            alignItems: "center", 
-            gap:1,
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
             textDecoration: "none",
             fontWeight: "bold",
             flexShrink: 0, // küçük ekranda kaymayı engeller

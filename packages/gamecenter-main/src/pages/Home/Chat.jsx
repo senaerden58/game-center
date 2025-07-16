@@ -1,27 +1,34 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Box, Typography, TextField, IconButton, Button, useTheme } from "@mui/material";
+import {
+  Box,
+  Typography,
+  TextField,
+  IconButton,
+  Button,
+  useTheme,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
 export default function Chat() {
-  const theme = useTheme();
-  const [open, setOpen] = useState(true);
-  const [messages, setMessages] = useState([]);
-  const [input, setInput] = useState("");
-  const messagesEndRef = useRef(null);
+  const theme = useTheme(); //tema renklerine ulaşmak için
+  const [open, setOpen] = useState(true); //açık mı kapalı mı?
+  const [messages, setMessages] = useState([]); //gönderilen mesajlar array şeklinde tutulur.
+  const [input, setInput] = useState(""); //mesajların geçici tutulduğu yer.
+  const messagesEndRef = useRef(null); //değişken gibi çalışır, değer saklar. Ama yeniden render olsa bile değeri kaybolmaz.
 
   useEffect(() => {
     if (open) messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, open]);
 
   const sendMessage = () => {
-    if (!input.trim()) return;
-    setMessages((prev) => [...prev, { id: Date.now(), text: input }]);
+    if (!input.trim()) return; //boş mu kontrolü
+    setMessages((prev) => [...prev, { id: Date.now(), text: input }]); //yeni mesajı ekler.
     setInput("");
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") sendMessage();
+    if (e.key === "Enter") sendMessage(); //enter ile mesaj gönderilebilir.
   };
 
   return (
@@ -29,8 +36,8 @@ export default function Chat() {
       {open ? (
         <Box
           sx={{
-            position: "fixed",
-            top: 64, // Navbar height (MUI default AppBar 64px)
+            position: "fixed", //sağ üste sabitli
+            top: 68,
             right: 24,
             width: 320,
             maxHeight: "300px",
@@ -41,7 +48,7 @@ export default function Chat() {
             flexDirection: "column",
             border: `1px solid ${theme.palette.divider}`,
             zIndex: 1300,
-            overflow: "hidden",
+            overflow: "hidden", //taşan içeriği sakladım
             fontFamily: "'Press Start 2P', cursive",
           }}
         >
@@ -54,17 +61,24 @@ export default function Chat() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              bgcolor: theme.palette.mode === "dark" ? "primary.dark" : "primary.light",
+              bgcolor:
+                theme.palette.mode === "dark"
+                  ? "primary.dark"
+                  : "primary.light",
               color: theme.palette.primary.contrastText,
             }}
           >
-            <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+            <Typography
+              variant="subtitle1"
+              sx={{ fontWeight: "bold", color: "white" }}
+            >
               Sohbet
             </Typography>
+
             <IconButton
               size="small"
               onClick={() => setOpen(false)}
-              sx={{ color: theme.palette.primary.contrastText }}
+              sx={{ color: "white" }}
               aria-label="Sohbeti kapat"
             >
               <CloseIcon fontSize="small" />
@@ -78,13 +92,14 @@ export default function Chat() {
               overflowY: "auto",
               px: 2,
               py: 1,
-              backgroundColor: theme.palette.mode === "dark" ? "#222" : "#f9f9f9",
+              backgroundColor:
+                theme.palette.mode === "dark" ? "#222" : "#f9f9f9",
               fontSize: "0.75rem",
               fontWeight: "bold",
             }}
           >
             {messages.length === 0 ? (
-              <Typography color="text.secondary" align="center" sx={{ mt: 8 }}>
+              <Typography color="text.primary" align="center" sx={{ mt: 8 }}>
                 Henüz mesaj yok. Başlayın!
               </Typography>
             ) : (
@@ -92,11 +107,11 @@ export default function Chat() {
                 <Box
                   key={msg.id}
                   sx={{
-                    mb: 1,
-                    px: 1,
-                    py: 0.5,
+                    mb: 1, //margin bottom=8px
+                    px: 1, //padding-left -right ->iç boşluklar
+                    py: 0.5, //padding-top-bottom  ->iç boşluklar
                     bgcolor: theme.palette.primary.main,
-                    color: theme.palette.primary.contrastText,
+                    color: "white",
                     borderRadius: 1,
                     maxWidth: "80%",
                     wordBreak: "break-word",
@@ -113,11 +128,11 @@ export default function Chat() {
           {/* Mesaj input ve gönderme */}
           <Box
             sx={{
-              px: 2,
-              py: 1,
+              px: 1,
+              py: 0.1,
               borderTop: `1px solid ${theme.palette.divider}`,
               display: "flex",
-              gap: 1,
+              gap: 2,
               bgcolor: theme.palette.background.paper,
             }}
           >
@@ -128,13 +143,7 @@ export default function Chat() {
               fullWidth
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              onKeyPress={handleKeyPress}
-              sx={{
-                "& .MuiOutlinedInput-root": {
-                  fontSize: "0.75rem",
-                  fontWeight: "bold",
-                },
-              }}
+              onKeyPress={handleKeyPress} //klavyede tuşa basınca çalışır.
               autoComplete="off"
             />
             <Button variant="contained" size="small" onClick={sendMessage}>
@@ -143,12 +152,12 @@ export default function Chat() {
           </Box>
         </Box>
       ) : (
-        // Küçük açma butonu, navbar altına yakın sağda
+        
         <IconButton
           onClick={() => setOpen(true)}
           sx={{
             position: "fixed",
-            top: 72,
+            top: 78,
             right: 24,
             bgcolor: theme.palette.primary.main,
             color: theme.palette.primary.contrastText,

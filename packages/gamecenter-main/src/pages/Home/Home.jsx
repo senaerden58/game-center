@@ -1,7 +1,6 @@
 import React from "react";
-import Content from "./Content";
+import Content from "./Images";
 import Chat from "./Chat";
-// import { Container, Typography } from '@mui/material';
 
 export default function Home() {
   return (
